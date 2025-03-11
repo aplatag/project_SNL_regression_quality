@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup (
     name='snl_exp_regression_quality',
-    version='0.1.0',
+    version='0.1.1',
     license='MIT',
     description='simple no linear regression quality (Exponential)',
     long_description=long_description,
@@ -21,5 +21,5 @@ setup (
 
     install_requires = ['numpy','pandas','scikit-rf','matplotlib','scipy'],
 
-    url='https://github.com/aplatag/project_de_embedding_rf.git'
+    url='https://github.com/aplatag/project_SNL_regression_quality'
 )
