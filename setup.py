@@ -1,29 +1,25 @@
-import os
-
 from setuptools import setup, find_packages
 
-def readme() -> str:
-    """Utility function to read the README.md.
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
-    Used for the `long_description`. It's nice, because now
-    1) we have a top level README file and
-    2) it's easier to type in the README file than to put a raw string in below.
-
-    Args:
-        nothing
-
-    Returns:
-        String of readed README.md file.
-    """
-    return open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
 
 setup (
-    name='project_snl_regression',
+    name='snl_exp_regression_quality',
     version='0.1.0',
-    author='Aplatag',
-    description='exp regression quality',
-    python_requires='>=3',
-    url='',
+    license='MIT',
+    description='simple no linear regression quality (Exponential)',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    author= 'EdelH, Aplatag',
     packages=find_packages(),
-    long_description=readme(),
+    include_package_data=True,
+    package_data={
+        'de_embedding': ['data/*'],
+        
+    },
+
+    install_requires = ['numpy','pandas','scikit-rf','matplotlib','scipy'],
+
+    url='https://github.com/aplatag/project_de_embedding_rf.git'
 )

@@ -14,15 +14,15 @@ Figure 1. Flowchart of the proposed methodology.
 
 
 ## Table of Contents
-- [Simple linear regression assumptions](#simple-linear-regression-assumptions)
-- [Simple linear regression quality](#simple-linear-regression-quality)
+- [Simple No linear regression assumptions](#simple-No-linear-regression-assumptions)
+- [Simple No linear regression quality](#simple-No-linear-regression-quality)
 - [Database structure](#database-structure)
 - [Installation](#installation)
 - [Code example](#code-example)
 
 
 
-## Simple linear regression assumptions
+## Simple No linear regression assumptions
 
 1.  **Outlier**: The term anomaly indicates that there is data that deviates significantly from the rest.
 2. **Normality**: refers to the normal distribution of errors or residuals.
@@ -30,16 +30,16 @@ Figure 1. Flowchart of the proposed methodology.
 4. **Independence**:  refers to the absence of temporal correlation between residuals.
 
 
-## Simple linear regression quality
+## Simple No linear regression quality
 
 1.	**Dynamic range**: is defined as the range of values of the variable to be predicted within which linearity exists.
-2.	**Sensitivity**: is defined as the value of the change in the variable to be predicted with respect to the predictor.
+2.	**Maximum Sensitivity**: is defined as the maximum value of the change in the variable to be predicted with respect to the predictor.
 3.	**Resolution**: is the ability of the measurement system to faithfully detect and indicate small changes in the characteristics of the measurement result.
 4.	**Accuracy**: is the degree of agreement between the result of a measurement and a true value of the measurand.
 
 ## Database structure
 <div align="justify">
-The "regression_quality" program works with two databases. The first database contains all repetitions for the variable X (see Figure 2(a)), and the second database contains all repetitions for the variable Y (see Figure 2(b)). Figure 2 illustrates an example of how to organize the data to use the program effectively.
+The "snl_exp_regression_quality" program works with two databases. The first database contains all repetitions for the variable X (see Figure 2(a)), and the second database contains all repetitions for the variable Y (see Figure 2(b)). Figure 2 illustrates an example of how to organize the data to use the program effectively.
 </div>
 
 
@@ -55,38 +55,46 @@ Figure 2. Example: (a) database for X, and (b) database for Y.
 Instructions on how to install the project. For example:
 ```bash
 
-pip install sl-regression-quality
+pip install snl-exp-regression-quality
 ```
 ## Code example
 For instance, the following code can be executed in Google Colab. Simply copy and paste it into a new Colab notebook.
 ```bash
 
-#--------------------------------------------------------------------------------
-# 1) Load libraries:
-import pandas as pd
-from sl_regression_quality.main_routine import regression_quality
-from sl_regression_quality.load_data import load_csv, load_csv_example
-
-#--------------------------------------------------------------------------------
-# 2) Load data . 
-# 2 a) uncomment the following line to load data included in the project (as an example)
-
-#dataset_x = load_csv_example('data_x_example.csv') # example data (uncomment line)
-#dataset_y = load_csv_example('data_y_example.csv') # example data (uncomment line)
-
-# 2 a) uncomment the following line to load the user's data by using the .csv file (described in the Database Structure section)
-
-#dataset_x = load_csv('your_data.csv') # example for your data (uncomment line)
-#dataset_y = load_csv('your_data.csv') # example for your data (uncomment line)
+#--------------------------------------------------------------------------------------------------
+# 1): Load libraries:
+#--------------------------------------------------------------------------------------------------
+from snl_regression_quality.snl_regression import SnlRegression
+from snl_regression_quality.modules.methods.reading_data import ReadingData
 
 
-alpha = 0.05 # significance level
-dL = 1.055 # dL
-dU = 1.211 # dU
+#--------------------------------------------------------------------------------------------------
+# 2): Initialization of input parameters:
+#--------------------------------------------------------------------------------------------------
 
-#--------------------------------------------------------------------------------
-# 3) Run analysis
-regression_quality(dataset_x,dataset_y,alpha,dL,dU)
+path_x_dataset = 'data_X.csv'
+path_y_dataset = 'data_Y.csv'
+significance_level = 0.05
+
+# Uncomment a Single Model to Run:
+
+#model_form = "concave_increasing"
+#model_form= "convex_increasing"
+#model_form = "convex_decreasing" 
+model_form= "concave_decreasing"
+
+#--------------------------------------------------------------------------------------------------
+# 3): Load and read data:
+#--------------------------------------------------------------------------------------------------
+
+x_values,y_values ,x_mean, y_mean = ReadingData(path_x_dataset,path_y_dataset,example=True).run()
+
+#--------------------------------------------------------------------------------------------------
+# 4): execute code:
+#--------------------------------------------------------------------------------------------------
+
+SnlRegression(x_values,y_values,x_mean,y_mean,model_form,significance_level).run()
+
 
 ```
 

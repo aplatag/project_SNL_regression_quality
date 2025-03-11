@@ -35,10 +35,10 @@ class Assumptions:
 
         #1) validation:
         if value_normality > self.alpha:
-            print('1.1)'+GREEN+ f'Satisfies normality ({round(value_normality,4)} > {self.alpha})'+RESET)
+            print('1.1)'+GREEN+ f'Satisfies normality ({round(value_normality,4)} > p-value)'+RESET)
             enable_normality = True
         else:
-            print('1.1)'+RED+ f'Does not satisfies normality ({round(value_normality,4)} > {self.alpha})'+RESET)
+            print('1.1)'+RED+ f'Does not satisfies normality ({round(value_normality,4)} > p-value)'+RESET)
             enable_normality = False
 
         
@@ -63,10 +63,10 @@ class Assumptions:
 
         #1) validation:
         if value_homocedasticity > self.alpha:
-            print('1.2)'+GREEN+f'Satisfies homoscedasticity ({round(value_homocedasticity,4)} > {self.alpha})'+RESET)
+            print('1.2)'+GREEN+f'Satisfies homoscedasticity ({round(value_homocedasticity,4)} > p-value )'+RESET)
             enable_homocedasticity = True
         else:
-            print('1.2)'+RED+ f'Does not satisfies homoscedasticity ({round(value_homocedasticity,4)} > {self.alpha})' +RESET)
+            print('1.2)'+RED+ f'Does not satisfies homoscedasticity ({round(value_homocedasticity,4)} > p-value)' +RESET)
             enable_homocedasticity = False
 
         return enable_homocedasticity
@@ -89,10 +89,10 @@ class Assumptions:
 
         #1) validation:
         if np.abs(r1) < r1L:
-            print('1.3)'+GREEN+f'Satisfies independence  ({round(np.abs(r1),4)} < {round(r1L,4)})'+RESET)
+            print('1.3)'+GREEN+f'Satisfies independence  ({round(np.abs(r1),4)} < {round(r1L,4)}) (|r1|<r1L)'+RESET)
             enable_independence  = True
         else:
-            print('1.3)'+RED+ f'Does not satisfies independence  ({round(np.abs(r1),4)} > {round(r1L,4)})' +RESET)
+            print('1.3)'+RED+ f'Does not satisfies independence  ({round(np.abs(r1),4)} > {round(r1L,4)}) (|r1|>r1L)' +RESET)
             enable_independence  = False
 
         return  enable_independence

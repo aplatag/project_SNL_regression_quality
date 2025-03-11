@@ -58,7 +58,7 @@ class Quality:
         OptDataOrden=OptData[IndexOr]
         sensib=max(abs(np.diff(OptDataOrden[:,1])/np.diff(OptDataOrden[:,0])))
 
-        print(f'2.2) Sensitivity value:' +GREEN+ f'{round(sensib,6)}'+RESET)
+        print(f'2.2) Max. Sensitivity :' +GREEN+ f'{round(sensib,6)}'+RESET)
 
 
     def resolution(self):
@@ -85,7 +85,7 @@ class Quality:
             i=i+1
             if f_oneway(a, b).pvalue<alpha:
                 Reso=odsy[i-1]
-                print(f'2.3) Resolution value:' +GREEN+ f'{round(Reso,6)}%'+RESET)
+                print(f'2.3) Resolution value:' +GREEN+ f'{round(Reso,6)}'+RESET)
                 break
 
     
